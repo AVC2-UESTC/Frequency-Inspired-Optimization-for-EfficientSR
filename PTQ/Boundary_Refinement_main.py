@@ -146,7 +146,7 @@ def main():
     lr = args.lr
     total_epochs = args.epochs
     observe_str = 'dual'
-    model_name = 'craft'
+    model_name = 'CRAFT'
     device = torch.device(args.device)
     model_folder_path = args.saved_model_path
     if not os.path.exists(model_folder_path):
@@ -205,14 +205,14 @@ def main():
 
         print('pixel loss:{:.4f}\tlr:{:.4f}'.format(sum(losses)/len(losses), optimizer.param_groups[0]['lr']))
 
-    torch.save(model, '{}/{}_{}_x{}_BR.pth'.format(model_folder_path, model_name, bits, scale))
+    torch.save(model, '{}/{}_MODEL_{}bit_x{}.pth'.format(model_folder_path, model_name, bits, scale))
 
     model.eval()
 
     for benchmark in benchmarks:
         valdir_HR = 'datasets/benchmark/{}/HR'.format(benchmark)
         valdir_LR = 'datasets/benchmark/{}/LR_bicubic/X{}'.format(benchmark, scale)
-        folder_path = '{}/{}/BR/{}'.format(output_dir, observe_str, benchmark)
+        folder_path = '{}/{}/BR/{}bit/{}'.format(output_dir, observe_str, args.bits, benchmark)
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
         test_results = OrderedDict()

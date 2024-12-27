@@ -35,6 +35,7 @@ parser.add_argument('--output_dir', type=str, default='results/ptq')
 parser.add_argument('--model_path', type=str, default='experiments/train_CRAFT_SR_X4/PTQ_models/craft_6bit_x4.pth')
 parser.add_argument('--benchmarks', type=str, default='Set5+Set14+B100')
 parser.add_argument('--scale', default=4, type=int, help='scale')
+parser.add_argument('--bits', default=4, type=int, help='quantization bits')
 
 args = parser.parse_args()
 
@@ -46,7 +47,7 @@ benchmarks = args.benchmarks.split('+')
 
 observe_str = 'dual'
 quantization_a = 'dual'
-model_name = 'craft'
+model_name = 'CRAFT'
 window_size = 16
 norm = 255
 
@@ -59,7 +60,7 @@ model.eval()
 for benchmark in benchmarks:
     valdir_HR = 'datasets/benchmark/{}/HR'.format(benchmark)
     valdir_LR = 'datasets/benchmark/{}/LR_bicubic/X{}'.format(benchmark, scale)
-    folder_path = '{}/{}/eval/{}bit/{}'.format(output_dir, observe_str, args.bit, benchmark)
+    folder_path = '{}/{}/eval/{}bit/{}'.format(output_dir, observe_str, args.bits, benchmark)
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
 

@@ -127,7 +127,7 @@ def main():
         os.makedirs(model_folder_path)
 
     observe_str = 'dual'
-    model_name = 'craft'
+    model_name = 'CRAFT'
 
     device = torch.device(args.device)
 
@@ -171,7 +171,7 @@ def main():
     model.model_close_calibrate()
     
     # 保存模型
-    torch.save(model, '{}/{}_{}bits_x{}_ADC.pth'.format(model_folder_path, model_name, bits, scale))
+    torch.save(model, '{}/{}_MODEL_{}bit_x{}_ADC.pth'.format(model_folder_path, model_name, bits, scale))
 
     print('Quantization...')
     model.model_quant()
@@ -189,7 +189,7 @@ def main():
         test_results['psnr_b'] = []
         psnr, ssim, psnr_y, ssim_y, psnr_b = 0, 0, 0, 0, 0
 
-        folder_path = '{}/{}/ADC/{}'.format(output_dir, observe_str, benchmark)
+        folder_path = '{}/{}/ADC/{}bit/{}'.format(output_dir, observe_str, args.bits, benchmark)
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 

@@ -1,8 +1,8 @@
 # Exploring Frequency-Inspired Optimization in Transformer for Efficient Single Image Super-Resolution
 
-Ao Li, Le Zhang, Yun Liu and Ce Zhu, "Exploring Frequency-Inspired Optimization in Transformer for Efficient Single Image Super-Resolution", TPAMI, 2025
+Ao Li, Le Zhang, Yun Liu and Ce Zhu, "Exploring Frequency-Inspired Optimization in Transformer for Efficient Single Image Super-Resolution", TPAMI
 
-[[arXiv](https://arxiv.org/abs/2308.05022)] [[pretrained models](https://drive.google.com/file/d/13wAmc93BPeBUBQ24zUZOuUpdBFG2aAY5/view?usp=sharing)]
+[[arXiv](https://arxiv.org/abs/2308.05022)] [[pretrained models](https://drive.google.com/file/d/1TaFjO7rqlu1Cc0C_3ERp_EW5Xx9Pl0-n/view?usp=sharing)]
 
 ---
 
@@ -20,7 +20,7 @@ Ao Li, Le Zhang, Yun Liu and Ce Zhu, "Exploring Frequency-Inspired Optimization 
 | <img src="figs/float/YumeiroCooking_HR.png" height=80> | <img src="figs/float/YumeiroCooking_LR.png" height=80> | <img src="figs/float/YumeiroCooking_SWINIR.png" height=80> | <img src="figs/float/YumeiroCooking_ESRT.png" height=80> | <img src="figs/float/YumeiroCooking_CRAFT.png" height=80> |
 
 ## Qunatization Visual Results (4-bit X4)
-|                      HR                      |                        LR                         | MinMax |  PTQ4SR  |                  Ours                |
+|                      Full-Precision                      |                        LR                         | MinMax |  PTQ4SR  |                  Ours                |
 | :------------------------------------------: | :-----------------------------------------------: | :----------------------------------------------: | :-------------------------------------------: | :-------------------------------------------: |
 | <img src="figs/quantization/Img061_HR.png" height=80> | <img src="figs/quantization/Img061_bicubic.png" height=80> | <img src="figs/quantization/Img061_minmax.png" height=80> | <img src="figs/quantization/Img061_PTQ4SR.png" height=80> | <img src="figs/quantization/Img061_Ours.png" height=80> |
 | <img src="figs/quantization/Comic_HR.png" height=80> | <img src="figs/quantization/Comic_bicubic.png" height=80> | <img src="figs/quantization/Comic_minmax.png" height=80> | <img src="figs/quantization/Comic_PTQ4SR.png" height=80> | <img src="figs/quantization/Comic_Ours.png" height=80> |
@@ -32,12 +32,10 @@ Ao Li, Le Zhang, Yun Liu and Ce Zhu, "Exploring Frequency-Inspired Optimization 
 - NVIDIA GPU + [CUDA 11.7](https://developer.nvidia.com/cuda-downloads)
 
 ```bash
-# Clone the github repo and go to the default directory 'CRAFT'.
 git clone https://github.com/AVC2-UESTC/Frequency-Inspired-Optimization-for-EfficientSR.git
 conda create -n CRAFT python=3.7
 conda activate CRAFT
 pip install -r requirements.txt
-python setup.py develop
 ```
 
 ## Training
@@ -64,7 +62,7 @@ python setup.py develop
   python PTQ/Adaptive_Dual_Clipping_main.py \
     --output_dir results/ptq \
     --saved_model_path experiments/train_CRAFT_SR_X4/PTQ_models \
-    --fp_model_path experiments/train_CRAFT_SR_X4/float_models/craft_net_x4.pth \
+    --fp_model_path experiments/pretrained_models/float_models/CRAFT_MODEL_x4.pth \
     --traindir_LR datasets/calibration_data/X4 \
     --benchmarks Set5+Set14+B100 \
     --scale 4 \
@@ -74,8 +72,8 @@ python setup.py develop
   python PTQ/Boundary_Refinement_main.py \
     --output_dir results/ptq \
     --saved_model_path experiments/train_CRAFT_SR_X4/PTQ_models \
-    --fp_model_path experiments/train_CRAFT_SR_X4/float_models/craft_net_x4.pth \
-    --ptq_adc_model_path experiments/train_CRAFT_SR_X4/PTQ_models/craft_4_x4_ADC.pth \
+    --fp_model_path experiments/train_CRAFT_SR_X4/float_models/CRAFT_MODEL_x4.pth \
+    --ptq_adc_model_path experiments/train_CRAFT_SR_X4/PTQ_models/CRAFT_MODEL_4bit_x4_ADC.pth \
     --traindir_LR datasets/calibration_data/X4 \
     --benchmarks Set5+Set14+B100 \
     --scale 4 \
@@ -90,9 +88,9 @@ python setup.py develop
 
 - Download the pre-trained [models](https://drive.google.com/file/d/13wAmc93BPeBUBQ24zUZOuUpdBFG2aAY5/view?usp=sharing) and place them in `experiments/pretrained_models/`. 
 
-  Floating-point models: CRAFT_MODEL_X2, CRAFT_MODEL_X3, and CRAFT_MODEL_X4. 
+  Floating-point models: CRAFT_MODEL_x2, CRAFT_MODEL_x3, and CRAFT_MODEL_x4. 
   
-  Qunatized models: CRAFT_MODEL_4bit_X4,  CRAFT_MODEL_6bit_X4 and CRAFT_MODEL_8bit_X4.
+  Qunatized models: CRAFT_MODEL_4bit_x4,  CRAFT_MODEL_6bit_x4 and CRAFT_MODEL_8bit_x4.
 
 - Download [test datasets](https://drive.google.com/drive/folders/1BtRY2CfpXfgkzabwDmrJaKl1LcIfdsQu?usp=sharing), place them in `datasets/benchmark`.
 
@@ -101,16 +99,16 @@ python setup.py develop
   ```shell
   # Test Set5 (X4) 
   # Floating-point model
-  python inference/inference_CRAFT.py --scale 4 --model_path experiments/pretrained_models/CRAFT_MODEL_X4.pth --folder_lq datasets/benchmark/Set5/LR_bicubic/X4 --input datasets/benchmark/Set5/HR --output results/CRAFT/Set5/X4
+  python inference/inference_CRAFT.py --scale 4 --model_path experiments/pretrained_models/float_models/CRAFT_MODEL_x4.pth --folder_lq datasets/benchmark/Set5/LR_bicubic/X4 --input datasets/benchmark/Set5/HR --output results/CRAFT/Set5/X4
   
   # 4-bit quantized model
-  python PTQ/PTQ_eval.py --model_path experiments/train_CRAFT_SR_X4/PTQ_models/craft_4bit_x4.pth
+  python PTQ/PTQ_eval.py --model_path experiments/pretrained_models/PTQ_models/CRAFT_MODEL_4bit_x4.pth --bits 4
 
   # 6-bit quantized model
-  python PTQ/PTQ_eval.py --model_path experiments/train_CRAFT_SR_X4/PTQ_models/craft_6bit_x4.pth
+  python PTQ/PTQ_eval.py --model_path experiments/pretrained_models/PTQ_models/CRAFT_MODEL_6bit_x4.pth --bits 6
 
   # 8-bit quantized model
-  python PTQ/PTQ_eval.py --model_path experiments/train_CRAFT_SR_X4/PTQ_models/craft_8bit_x4.pth
+  python PTQ/PTQ_eval.py --model_path experiments/pretrained_models/PTQ_models/CRAFT_MODEL_8bit_x4.pth --bits 8
   ```
 - The results will be saved in the `results` directory.
 
