@@ -68,7 +68,7 @@ pip install -r requirements.txt
     --scale 4 \
     --bits 4
 
-  # Stage 2: Adaptive Dual Clipping Process
+  # Stage 2: Boundary Refinement Process
   python PTQ/Boundary_Refinement_main.py \
     --output_dir results/ptq \
     --saved_model_path experiments/train_CRAFT_SR_X4/PTQ_models \
