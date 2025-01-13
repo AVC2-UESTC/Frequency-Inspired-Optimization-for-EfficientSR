@@ -1,6 +1,6 @@
 # Exploring Frequency-Inspired Optimization in Transformer for Efficient Single Image Super-Resolution
 
-Ao Li, Le Zhang, Yun Liu and Ce Zhu, "Exploring Frequency-Inspired Optimization in Transformer for Efficient Single Image Super-Resolution", TPAMI
+Ao Li, Le Zhang, Yun Liu and Ce Zhu, "Exploring Frequency-Inspired Optimization in Transformer for Efficient Single Image Super-Resolution", TPAMI, 2025
 
 [[arXiv](https://arxiv.org/abs/2308.05022)] [[pretrained models](https://drive.google.com/file/d/1TaFjO7rqlu1Cc0C_3ERp_EW5Xx9Pl0-n/view?usp=sharing)]
 
