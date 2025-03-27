@@ -1,8 +1,8 @@
 # Exploring Frequency-Inspired Optimization in Transformer for Efficient Single Image Super-Resolution
 
-Ao Li, Le Zhang, Yun Liu and Ce Zhu, "Exploring Frequency-Inspired Optimization in Transformer for Efficient Single Image Super-Resolution", TPAMI, 2025
+[Ao Li](https://scholar.google.com/citations?user=rMnQ-u0AAAAJ&hl=en), [Le Zhang](https://scholar.google.com/citations?user=61LOyWUAAAAJ&hl=en), [Yun Liu](https://scholar.google.com/citations?user=UB3doCoAAAAJ&hl=en) and [Ce Zhu](https://scholar.google.com/citations?user=C7iZbYMAAAAJ&hl=en), "Exploring Frequency-Inspired Optimization in Transformer for Efficient Single Image Super-Resolution", TPAMI, 2025
 
-[[arXiv](https://arxiv.org/abs/2308.05022)] [[pretrained models](https://drive.google.com/file/d/1TaFjO7rqlu1Cc0C_3ERp_EW5Xx9Pl0-n/view?usp=sharing)]
+[[arXiv](https://arxiv.org/abs/2308.05022)] [[Official](https://ieeexplore.ieee.org/document/10852524)] 
 
 ---
 
@@ -86,11 +86,15 @@ pip install -r requirements.txt
 
 ### Test images with High-Resolution (HR) Images
 
-- Download the pre-trained [models](https://drive.google.com/file/d/13wAmc93BPeBUBQ24zUZOuUpdBFG2aAY5/view?usp=sharing) and place them in `experiments/pretrained_models/`. 
+- Download the pre-trained models and place them in `experiments/pretrained_models/`. 
 
-  Floating-point models: CRAFT_MODEL_x2, CRAFT_MODEL_x3, and CRAFT_MODEL_x4. 
+  Floating-point models (Google Drive): [CRAFT_MODEL_x2](https://drive.google.com/file/d/1SOKsXX0IaNYp4PA5TAoP10MjTPQ-tEYs/view?usp=sharing), [CRAFT_MODEL_x3](https://drive.google.com/file/d/1y0j5gpEFnDs58HNQYVsLEJXlb4i74IhY/view?usp=drive_link), and [CRAFT_MODEL_x4](https://drive.google.com/file/d/1x61m_F4JBBx2krfnukwGD53TefBkloVz/view?usp=drive_link).
   
-  Qunatized models: CRAFT_MODEL_4bit_x4,  CRAFT_MODEL_6bit_x4 and CRAFT_MODEL_8bit_x4.
+  Floating-point models (BaiduYun): [CRAFT_MODEL_x2](https://pan.baidu.com/s/16PiMP_SMslcVXr-9X6OOpA?pwd=cq95), [CRAFT_MODEL_x3](https://pan.baidu.com/s/14mdcgRk_qvo9c7fB06PhNA?pwd=cq95), and [CRAFT_MODEL_x4](https://pan.baidu.com/s/1wIkoOF2fhjnymuxsrK4Mzg?pwd=cq95). 
+  
+  Qunatized models (Google Drive): [CRAFT_MODEL_4bit_x4](https://drive.google.com/file/d/1Fp3VHVqGnVnLXEnrlj6k1VvgSxtSmwcB/view?usp=drive_link),  [CRAFT_MODEL_6bit_x4](https://drive.google.com/file/d/1HyzaDBm_0HekpHRXUfyk4Xx08lKtDE5d/view?usp=drive_link) and [CRAFT_MODEL_8bit_x4](https://drive.google.com/file/d/1i1EjfU1Ds-Y2E-qv8Jq0Lw0HcGoEF0gj/view?usp=drive_link).
+  
+  Qunatized models  (BaiduYun): [CRAFT_MODEL_4bit_x4](https://pan.baidu.com/s/1IclYZfnTQeDF7wLNOlcJ6A?pwd=cq95),  [CRAFT_MODEL_6bit_x4](https://pan.baidu.com/s/1KnDM70c9yMoH8-mFYuBUyQ?pwd=cq95) and [CRAFT_MODEL_8bit_x4](https://pan.baidu.com/s/1TSOfGp2FjEbdQ8I_eOdSiw?pwd=cq95).
 
 - Download [test datasets](https://drive.google.com/drive/folders/1BtRY2CfpXfgkzabwDmrJaKl1LcIfdsQu?usp=sharing), place them in `datasets/benchmark`.
 
@@ -129,6 +133,30 @@ pip install -r requirements.txt
 |CRAFT-8bits       | 8/8        | 32.45/0.8965 | 28.80/0.7850 | 27.68/0.7397 | 26.49/0.7967 | 31.06/0.9141  |
 |CRAFT-6bits       | 6/6        | 32.01/0.8820 | 28.51/0.7717 | 27.49/0.7272 | 26.16/0.7808 | 30.11/0.8922  |
 |CRAFT-4bits       | 4/4        | 29.46/0.7854 | 26.92/0.6891 | 26.32/0.6492 | 24.50/0.6787 | 27.03/0.7653  |
+
+## Citation
+
+If you find the code helpful in your research or work, please cite the following paper(s).
+
+```
+@inproceedings{li2023craft,
+  title={Feature Modulation Transformer: Cross-Refinement of Global Representation via High-Frequency Prior for Image Super-Resolution},
+  author={Li, Ao and Zhang, Le and Liu, Yun and Zhu, Ce},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={12514--12524},
+  year={2023}
+}
+
+@article{li2025exploring,
+  author={Li, Ao and Zhang, Le and Liu, Yun and Zhu, Ce},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Exploring Frequency-Inspired Optimization in Transformer for Efficient Single Image Super-Resolution}, 
+  year={2025},
+  volume={47},
+  number={4},
+  pages={3141-3158},
+}
+```
 
 ## Acknowledgements
 
